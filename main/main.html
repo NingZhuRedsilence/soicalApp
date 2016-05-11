@@ -1,0 +1,97 @@
+
+<div ng-controller ="PostController as postVM">
+	<header class="navbar" id="top" role="banner">
+		<div class="container">
+			<div class="navbar-form navbar-left">
+				<div class="input-group">
+					<span class="input-group-addon glyphicon glyphicon-search"></span>
+					<input type="text" class="form-control search-bar" placeholder="search keyword" ng-model="postVM.searchKeyword" id="search">
+				</div>
+
+			</div>
+			<nav id="" class="">
+				<ul class="nav navbar-right">
+					<li><a class="navbar-btn btn btn-default" ng-click="vm.logout()"><strong>Log Out</strong></a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="profileCard" ng-controller="UserController as userVM">
+
+					<span class="profileCard-bg">
+						<a id="eidtProfile" data-toggle="modal" data-target="#profile"><span class="glyphicon glyphicon-pencil"></span>Edit Profile</a>
+					</span>
+
+					<div >
+						<img class="profileCard-avatarImage" ng-src="{{userVM.avatar}}">
+						<div class="profileCard-userFields">
+							<div class="profileCard-name">
+								<a class="" href="">{{userVM.name}}</a>
+							</div>
+						</div>
+
+						<div class="profile-status">
+							<span id="userStatus">
+								<input id="newStatus" type="text" ng-model="userVM.newStatus" ng-hide="userVM.editHide">
+								<span ng-show="userVM.editHide">{{userVM.status}}</span>
+							</span>
+							<a id="saveStatus" class="glyphicon glyphicon-pencil" ng-click="userVM.editStatus();" ng-show="userVM.editHide">Edit</a>
+							<a id="saveStatus" class="glyphicon glyphicon-floppy-disk" ng-hide="userVM.editHide" ng-click="userVM.editStatus();">Save</a>
+							<a id="statusCancel" class="glyphicon glyphicon-remove" ng-hide="userVM.editHide" ng-click="userVM.editCancel()">Cancel</a>
+						</div>
+					</div>
+				</div>
+				<div class="well" ng-controller="FollowingController as followingVM">
+					<div>
+						<strong>Followers:</strong> <a class="glyphicon glyphicon-pencil" id="followerEditBtn" ng-click="followingVM.startEdit()" ng-show="followingVM.editBtnShow">Edit</a>
+						<div id="addFollowerPanel" ng-show = "followingVM.followerPanalShow">
+							<input class="form-control" id="newFollowerInput" ng-model="followingVM.newFollower"><a class="glyphicon glyphicon-plus addFollowerPanelBtn" ng-click="followingVM.add()"></a><a class="glyphicon glyphicon-remove addFollowerPanelBtn"  id="followerEditCancel" ng-click="followingVM.endEdit()"></a>
+							<div id="newFollowerErr" class="help-message-err-login" ng-hide="followingVM.newFollowerErrHide">{{followingVM.newFollowerMessage}}</div>
+						</div>
+						<div ng-repeat="followingUser in followingVM.followingUsers">
+							<div class="follower-content">
+								<div class="follower-profile">
+
+									<img class="follower-avatar" ng-src="{{followingUser.avatar}}" alt="">
+									<span class="follower-text" ng-style="followingVM.followerTextCss">
+										<a class="follower-name">{{followingUser.username}}</a>
+										<p class="follower-status">{{followingUser.status}}</p>
+									</span>
+									<span class="glyphicon glyphicon-remove followerDeleteBtn" ng-click="followingVM.delete($index)" ng-show="followingVM.deleteBtnShow"></span>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="new-post well">
+					<div contenteditable="true" id="newPostTitle" class="new-post-textarea" placeholder="{{postVM.postPanelPlaceHolder}}" tabindex="1" ng-focus="postVM.postPanelShow = true; postVM.postPanelPlaceHolder = 
+					'New post body';"  ng-model="postVM.newPostBody"></div>
+					<div id="postEditPanel" ng-show="postVM.postPanelShow">
+						<hr>
+						<div id="newPostErr" class="help-message-err-login" ng-show="postVM.postErrShow">You should at least input some content or choose an image.</div>
+						<input type="file" accept="image/*" onchange="angular.element(this).scope().postVM.setFile(this)" >
+
+						<button id="newPostCancel" class="new-post-submit btn btn-warning" ng-click="postVM.newPostCancel()">Cancel</button> <button class="new-post-submit btn btn-success" ng-click="postVM.newPost()"> Post </button>
+					</div>
+					
+				</div>
+				<div class="feeds-container">
+					<div class="feed well" ng-repeat="post in postVM.posts | filter: postVM.searchKeyword">
+						<post >
+						</post>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<profile>
+	</profile>
+</div>
+

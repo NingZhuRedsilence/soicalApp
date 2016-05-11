@@ -1,0 +1,140 @@
+<header class="navbar" id="top" role="banner">
+	<div class="container">
+		<nav id="" class="">
+			<ul class="nav navbar-right">
+				<li><a class="navbar-btn btn btn-default" data-toggle="modal" data-target="#logInModal"><strong>Log In</strong></a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+<div class="head-page jumbotron">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-1">
+				<h1>Welcome to the Hoot.</h1>
+				<p>Get to know the most awesome Rice Owls!</p>
+			</div>
+			<div class="col-sm-4">
+				<form class="form-horizontal" id="registration">
+					<div class="form-group">
+						<div class="col-sm-6">
+							<input type="text" class="form-control" ng-model="vm.firstName" id="firstName" placeholder="First Name" ng-blur="vm.checkFirstname(vm)" ng-keyup="vm.checkFirstname(vm)" ng-focus="vm.checkFirstname(vm)">
+							<span class="help-message-err" ng-show="vm.firstnameErr">{{vm.firstnameErrMessage}}</span>
+						</div>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" ng-model="vm.lastName" id="lastName" placeholder="Last Name" ng-blur="vm.checkLastname(vm)" ng-keyup="vm.checkLastname(vm)" ng-focus="vm.checkLastname(vm)">
+							<span class="help-message-err" ng-show="vm.lastnameErr">{{vm.lastnameErrMessage}}</span>
+						</div>
+					</div>
+					<div class="form-group" id="form-zipcode">
+						<div class="col-sm-12 offset-sm-3">
+							<input type="text" class="form-control" ng-model="vm.zipcode" id="zipcode" placeholder="Zipcode" ng-blur="vm.checkZipcode(vm)" ng-keyup="vm.checkZipcode(vm)" ng-focus="vm.checkZipcode(vm)">
+							<span class="help-message-err" ng-show="vm.zipcodeErr">{{vm.zipcodeErrMessage}}</span>
+						</div>
+					</div>
+					<div class="form-group" id="form-email">
+						<div class="col-sm-12 offset-sm-3">
+							<input type="email" class="form-control" ng-model="vm.email" id="email" placeholder="Your email" ng-blur="vm.checkEmail(vm)" ng-keyup="vm.checkEmail(vm)" ng-focus="vm.checkEmail(vm)">
+							<span class="help-message-err" ng-show="vm.emailErr">{{vm.emailErrMessage}}</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-12">
+							<input type="password" class="form-control" ng-model="vm.password" id="password" placeholder="Create a password" ng-blur="vm.checkPassword(vm)" ng-keyup="vm.checkPassword(vm)" ng-focus="vm.checkPassword(vm)">
+							<span class="help-message-err" ng-show="vm.passwordErr">{{vm.passwordErrMessage}}</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-12">
+							<input type="password" class="form-control" name="password" id="confirm-password" placeholder="Confirm your password" ng-model="vm.cpassword" ng-blur="vm.checkCPassword(vm)" ng-keyup="vm.checkCPassword(vm)" ng-focus="vm.checkCPassword(vm)">
+							<span class="help-message-err" ng-show="vm.cpasswordErr">{{vm.cpasswordErrMessage}}</span>
+							<span id="pwdReminder" class="help-message">Please use at least six characters for password.</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-12">
+							<input type="submit" class="form-control btn btn-success" ng-disabled="vm.zipcodeErr || vm.emailErr || vm.passwordErr || vm.cpasswordErr ||vm.firstnameErr||vm.lastnameErr" ng-click="vm.register()" value="Sign Up">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="content-1">
+	<div class="container">
+		<div  class="content-1-title">
+			<p>What's happening inside!</p>
+		</div>
+		<div class="row" >
+			<div class="col-sm-12" ng-repeat="post in vm.posts">
+				<div class="feeds-container">
+					<div class="feed well" >
+						<div class="feed-user">
+							<img class="feed-avatar" ng-src="{{post.avatar}}">
+							<div class="feed-user-text">
+								<strong class="feed-user-name">{{post.author}}</strong>
+								<p><strong>Posted at </strong>{{post.date}}</p>
+							</div>
+
+						</div>
+						<div ng-if="post.title">
+							<p class="feed-title">{{post.title}}</p>
+						</div>
+						<p class="feed-body">{{post.body}}</p>
+						<div ng-if="post.img">
+							<img class="feed-img" ng-src="{{post.img}}">
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<hr class="half-rule">
+			<p class="lead">Log in to see more.</p>
+			<a class="btn btn-success" data-toggle="modal" data-target="#logInModal">Log In</a>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="logInModal" tabindex="-1" role="dialog" aria-labelledby="logInModalLabel">
+	<div class="modal-dialog" role="document">
+
+		<div class="modal-content">
+			<form class="form-horizontal" id="login-form">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>		</button>
+					<h4 class="modal-title" id="logInModalLabel">Please Log In</h4>
+				</div>
+				<div class="modal-body">
+
+					<div class="form-group">
+						<label for="email" class="col-sm-2 control-label">User Name</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="userName"  placeholder="User Name" ng-model="vm.loginUsername" ng-blur="vm.checkUsername(vm)" ng-keyup="vm.checkUsername(vm)" ng-focus="vm.checkUsername(vm)">
+							<span class="help-message-err-login" ng-show="vm.loginUsernameErr">{{vm.usernameErrMessage}}</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="password" class="col-sm-2 control-label">Password</label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control" id="password" name="password" placeholder="Password" ng-model="vm.loginPassword">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-9 col-sm-offset-2">
+							<span class="help-message-err-login">{{vm.errMessage}}</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button id="login-btn" class="btn btn-primary"  ng-click="vm.login()" ng-disabled="vm.loginUsernameErr">Log In</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

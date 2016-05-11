@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html ng-app="hootApp">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="description" content="Comp531 Frontend">
+  <meta name="author" content="Ning Zhu">
+  <title>The Hoot</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="common.css">
+  <link rel="stylesheet" type="text/css" href="landing/landing.css">
+  <link rel="stylesheet" type="text/css" href="main/main.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-route.min.js"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-resource.min.js"></script>  
+  
+  
+  <script src="app.js"></script>
+  <script src="service/apiSrv.js"></script>
+  <script src="service/logStatusSrv.js"></script>
+  <script src="service/formCheckingSrv.js"></script>
+  <script src="landing/landing.js"></script>
+  <script src="main/main.js"></script>
+  <script src="main/post/postCtl.js"></script>
+  <script src="main/post/postDir.js"></script>
+  <script src="main/user/userCtl.js"></script>
+  <script src="main/following/followingCtl.js"></script>
+  <script src="main/profile/profile.js"></script>
+  <script src="helper/helper.js"></script>
+  
+</head>
+<body>
+  <div ng-view></div>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <p>Comp531</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+

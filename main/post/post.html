@@ -1,0 +1,31 @@
+<div>
+	<div class="feed-user">
+		<img class="feed-avatar" ng-src="{{post.avatar}}">
+		<div class="feed-user-text">
+			<strong class="feed-user-name">{{post.author}}</strong>
+			<p><strong>Posted at </strong>{{post.date}}</p>
+		</div>
+	</div>
+	<div ng-if="post.title">
+		<p class="feed-title">{{post.title}}</p>
+	</div>
+	<p class="feed-body">{{post.body}}	<strong ng-if="post.author==postVM.userName"><a id="saveStatus" class="glyphicon glyphicon-pencil" ng-click="postVM.editPost(post.id,$index);">Edit</a></strong></p>
+	
+	<div ng-if="post.img">
+		<img class="feed-img" ng-src="{{post.img}}">
+	</div>
+
+	<hr>
+	<strong id="commentsLabel">Comments:</strong><a id="hideComments{{$index}}" class="hideComments" ng-click="postVM.hideComments($index)">{{post.commentsHideMessage? post.commentsHideMessage: 'show comments'}}</a>
+	<div class="comments{{$index}} comments" ng-show="post.commentsHide">
+
+			<div ng-repeat="comment in post.comments" class="commentText">
+				<strong>{{comment.author}}: </strong><span ng-click="postVM.reply(comment.author,$parent.$index)">{{comment.body}} </span><span class="commentTime">at {{comment.date}}</span><span ng-if="comment.author==postVM.userName"><a id="saveStatus" class="glyphicon glyphicon-pencil" ng-click="postVM.editComment(post.id,comment.commentId,comment.author,$parent.$parent.$index);">Edit</a></span>
+			</div>
+		<div>
+			<input id="commentInput" class="form-control" placeholder="Comment Here" ng-model="postVM.newComment[$index]">
+			<button class="btn btn-default" ng-click="postVM.addComment($index)">Post</button>
+			<button class="btn btn-default" ng-click="postVM.addCommentCancel($index)">Cancel</button>
+		</div>
+	</div>
+</div>
